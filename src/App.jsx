@@ -1,16 +1,38 @@
-import { useState } from 'react';
-import './App.css';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react'
+import './App.css'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import PolishWords from './PolishWords'
+import EnglishWords from './EnglishWords'
+import Word from './Word'
+import CreateWord from './CreateWord'
 
-const POSTS = [
-  { id: 1, title: 'Post 1' },
-  { id: 2, title: 'Post 2' },
-  { id: 3, title: 'Post 3' },
-];
+const App = () => {
+  const [currentPage, setCurrentPage] = useState(<PolishWords />)
+  return (
+    <div>
+      <div>
+        <button onClick={() => setCurrentPage(<PolishWords />)}>Polsko-Angielski</button>
+        <button onClick={() => setCurrentPage(<EnglishWords />)}>English-Polish</button>
+        <button onClick={() => setCurrentPage(<Word id={1} />)}>Word</button>
+        <button onClick={() => setCurrentPage(<CreateWord setCurrentPage={setCurrentPage} />)}>
+          Stworzyc
+        </button>
+      </div>
+      <div>{currentPage}</div>
+    </div>
+  )
+}
+export default App
 
-const wait = time => {
-  return new Promise(resolve => setTimeout(resolve, time));
-};
+// const POSTS = [
+//   { id: 1, title: 'Post 1' },
+//   { id: 2, title: 'Post 2' },
+//   { id: 3, title: 'Post 3' },
+// ]
+
+// const wait = time => {
+//   return new Promise(resolve => setTimeout(resolve, time))
+// }
 //  Podstawy examples
 // function App() {
 //   const queryClient = useQueryClient();
@@ -52,6 +74,3 @@ const wait = time => {
 // /posts/1 -> ["posts", post.id]
 // / posts?autorId=1 -> ["posts",{authorId:1}]
 // /posts/2/comments -> ["posts",post.id,"comments"]
-
-const App = () => {};
-export default App;

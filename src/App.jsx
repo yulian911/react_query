@@ -1,13 +1,15 @@
-import { useState } from 'react'
-import './App.css'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import PolishWords from './PolishWords'
-import EnglishWords from './EnglishWords'
-import Word from './Word'
-import CreateWord from './CreateWord'
+import { useState } from 'react';
+import './App.css';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import PolishWords from './PolishWords';
+import EnglishWords from './EnglishWords';
+import Word from './Word';
+import CreateWord from './CreateWord';
+import { PostListPaginated } from './PostListPaginated';
+import { PostListInfinite } from './PostListInfinite';
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState(<PolishWords />)
+  const [currentPage, setCurrentPage] = useState(<PolishWords />);
   return (
     <div>
       <div>
@@ -17,12 +19,14 @@ const App = () => {
         <button onClick={() => setCurrentPage(<CreateWord setCurrentPage={setCurrentPage} />)}>
           Stworzyc
         </button>
+        <button onClick={() => setCurrentPage(<PostListPaginated />)}>Post List Paginated</button>
+        <button onClick={() => setCurrentPage(<PostListInfinite />)}>Post List Infinite</button>
       </div>
       <div>{currentPage}</div>
     </div>
-  )
-}
-export default App
+  );
+};
+export default App;
 
 // const POSTS = [
 //   { id: 1, title: 'Post 1' },
